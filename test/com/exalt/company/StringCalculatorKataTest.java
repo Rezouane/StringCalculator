@@ -6,29 +6,36 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StringCalculatorKataTest {
 
+    private static final StringCalculatorKata STRING_CALCULATOR_KATA = new StringCalculatorKata();
+
     @Test
     void emptyStringTest() {
-        StringCalculatorKata stringCalculatorKata = new StringCalculatorKata();
-
-        assertEquals(0, stringCalculatorKata.add(""));
+        assertEquals(0, STRING_CALCULATOR_KATA.add(""));
     }
 
     @Test
     void nullStringTest() {
-        StringCalculatorKata stringCalculatorKata = new StringCalculatorKata();
         String s = null;
-        assertEquals(0, stringCalculatorKata.add(s));
+        assertEquals(0, STRING_CALCULATOR_KATA.add(s));
     }
 
     @Test
     void simpleSumTest() {
-        StringCalculatorKata stringCalculatorKata = new StringCalculatorKata();
-        assertEquals(3, stringCalculatorKata.add("1,2"));
+        assertEquals(3, STRING_CALCULATOR_KATA.add("1,2"));
     }
 
     @Test
     void multipleSumTest() {
-        StringCalculatorKata stringCalculatorKata = new StringCalculatorKata();
-        assertEquals(15, stringCalculatorKata.add("1,2,3,4,5"));
+        assertEquals(15, STRING_CALCULATOR_KATA.add("1,2,3,4,5"));
+    }
+
+    @Test
+    void newLineSumTest() {
+        assertEquals(6, STRING_CALCULATOR_KATA.add("1,2\\n3"));
+    }
+
+    @Test
+    void newLineErrorSumTest() {
+        UnsupportedOperationException exception = assertThrows(UnsupportedOperationException.class, () -> STRING_CALCULATOR_KATA.add("1,2,\\n3"));
     }
 }
