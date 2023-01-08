@@ -1,6 +1,8 @@
 package com.exalt.company;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class StringCalculatorKata {
 
@@ -13,11 +15,12 @@ public class StringCalculatorKata {
 
         String delimiter = extractDelimiter(lineSplitedNumbers);
 
-        if(!delimiter.equals(",")){
+        if (!delimiter.equals(",")) {
             lineSplitedNumbers = removeFirstLine(lineSplitedNumbers);
         }
 
         checkSyntax(lineSplitedNumbers, delimiter);
+        checkNegativeNumbers(lineSplitedNumbers, delimiter);
 
         return Arrays.stream(extractNumbers(splitNumbers(concatLines(lineSplitedNumbers, delimiter), delimiter))).sum();
 
@@ -32,7 +35,7 @@ public class StringCalculatorKata {
     }
 
     private String extractDelimiter(String[] lines) {
-        return lines[0].contains("//") ? lines[0].substring(lines[0].lastIndexOf("/")+1) : ",";
+        return lines[0].contains("//") ? lines[0].substring(lines[0].lastIndexOf("/") + 1) : ",";
     }
 
     private void checkSyntax(String[] numbers, String delimiter) {
@@ -53,5 +56,28 @@ public class StringCalculatorKata {
 
     private int[] extractNumbers(String[] numbers) {
         return Arrays.stream(numbers).mapToInt(Integer::parseInt).toArray();
+    }
+
+    private void checkNegativeNumbers(String[] lines, String delimiter) {
+        Boolean isNegative = false;
+        StringBuilder message = new StringBuilder("negatives not allowed :");
+        int[] numbers = null;
+        for (String s : lines) {
+            if (s.contains("-")) {
+                numbers = extractNumbers(splitNumbers(s, delimiter));
+                if (!isNegative) {
+                    isNegative = true;
+                }
+                for (int num : numbers) {
+                    if (num < 0) {
+                        message.append(" " + num);
+                    }
+                }
+            }
+        }
+
+        if (isNegative) {
+            throw new UnsupportedOperationException(message.toString());
+        }
     }
 }
