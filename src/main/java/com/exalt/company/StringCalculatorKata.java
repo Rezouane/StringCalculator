@@ -14,9 +14,7 @@ public class StringCalculatorKata {
 
         checkSyntax(lineSplitedNumbers, delimiter);
 
-        String oneLineNumbers = concatLines(lineSplitedNumbers, delimiter);
-
-        return Arrays.stream(extractNumbers(splitNumbers(oneLineNumbers, delimiter))).sum();
+        return Arrays.stream(extractNumbers(splitNumbers(concatLines(lineSplitedNumbers, delimiter), delimiter))).sum();
 
     }
 
