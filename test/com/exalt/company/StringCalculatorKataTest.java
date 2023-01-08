@@ -25,4 +25,10 @@ class StringCalculatorKataTest {
         StringCalculatorKata stringCalculatorKata = new StringCalculatorKata();
         assertEquals(3, stringCalculatorKata.add("1,2"));
     }
+
+    @Test
+    void multipleSumTest() {
+        StringCalculatorKata stringCalculatorKata = new StringCalculatorKata();
+        assertEquals(15, stringCalculatorKata.add("1,2,3,4,5"));
+    }
 }
