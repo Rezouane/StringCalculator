@@ -43,4 +43,10 @@ class StringCalculatorKataTest {
     void newDelimiterSumTest() {
         assertEquals(6, STRING_CALCULATOR_KATA.add("//;\n1;2\n3"));
     }
+
+    @Test
+    void negativeSumErrorTest() {
+        UnsupportedOperationException exception = assertThrows(UnsupportedOperationException.class, () -> STRING_CALCULATOR_KATA.add("-1,2,\n-3"));
+        assertEquals("negatives not allowed : -1,-3", exception.getMessage());
+    }
 }
