@@ -31,11 +31,11 @@ class StringCalculatorKataTest {
 
     @Test
     void newLineSumTest() {
-        assertEquals(6, STRING_CALCULATOR_KATA.add("1,2\\n3"));
+        assertEquals(6, STRING_CALCULATOR_KATA.add("1,2\n3"));
     }
 
     @Test
     void newLineErrorSumTest() {
-        UnsupportedOperationException exception = assertThrows(UnsupportedOperationException.class, () -> STRING_CALCULATOR_KATA.add("1,2,\\n3"));
+        assertThrows(UnsupportedOperationException.class, () -> STRING_CALCULATOR_KATA.add("1,2,\n3"));
     }
 }

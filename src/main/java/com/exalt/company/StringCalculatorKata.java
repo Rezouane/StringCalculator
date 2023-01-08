@@ -10,8 +10,30 @@ public class StringCalculatorKata {
         }
         String delimiter = ",";
 
-        return Arrays.stream(extractNumbers(splitNumbers(numbers, delimiter))).sum();
+        String[] lineSplitedNumbers = splitLines(numbers);
 
+        checkSyntax(lineSplitedNumbers, delimiter);
+
+        String oneLineNumbers = concatLines(lineSplitedNumbers, delimiter);
+
+        return Arrays.stream(extractNumbers(splitNumbers(oneLineNumbers, delimiter))).sum();
+
+    }
+
+    private String concatLines(String[] numbers, String delimiter) {
+        return String.join(delimiter, numbers);
+    }
+
+    private void checkSyntax(String[] numbers, String delimiter) {
+        for (String s : numbers) {
+            if (s.endsWith(delimiter)) {
+                throw new UnsupportedOperationException("Syntax error");
+            }
+        }
+    }
+
+    private String[] splitLines(String numbers) {
+        return numbers.split("\n");
     }
 
     private String[] splitNumbers(String numbers, String delimiter) {
