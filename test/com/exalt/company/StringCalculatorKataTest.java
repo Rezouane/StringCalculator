@@ -38,4 +38,9 @@ class StringCalculatorKataTest {
     void newLineErrorSumTest() {
         assertThrows(UnsupportedOperationException.class, () -> STRING_CALCULATOR_KATA.add("1,2,\n3"));
     }
+
+    @Test
+    void newDelimiterSumTest() {
+        assertEquals(6, STRING_CALCULATOR_KATA.add("//;\n1;2\n3"));
+    }
 }
