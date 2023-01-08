@@ -8,9 +8,14 @@ public class StringCalculatorKata {
         if (numbers == null || numbers.equals("")) {
             return 0;
         }
-        String delimiter = ",";
 
         String[] lineSplitedNumbers = splitLines(numbers);
+
+        String delimiter = extractDelimiter(lineSplitedNumbers);
+
+        if(!delimiter.equals(",")){
+            lineSplitedNumbers = removeFirstLine(lineSplitedNumbers);
+        }
 
         checkSyntax(lineSplitedNumbers, delimiter);
 
@@ -18,8 +23,16 @@ public class StringCalculatorKata {
 
     }
 
+    private String[] removeFirstLine(String[] lines) {
+        return Arrays.copyOfRange(lines, 1, lines.length);
+    }
+
     private String concatLines(String[] numbers, String delimiter) {
         return String.join(delimiter, numbers);
+    }
+
+    private String extractDelimiter(String[] lines) {
+        return lines[0].contains("//") ? lines[0].substring(lines[0].lastIndexOf("/")+1) : ",";
     }
 
     private void checkSyntax(String[] numbers, String delimiter) {
